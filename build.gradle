@@ -34,7 +34,7 @@ compileKotlin {
 
 jar {
     manifest.attributes(
-            'Main-Class': 'WyvtilitiesDeleterKt'
+            'Main-Class': 'DeleterKt'
     )
 
     enabled = false
