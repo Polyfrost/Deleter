@@ -8,7 +8,7 @@ import kotlin.system.exitProcess
 
 var file: File? = null
 var delete = ""
-val frame = JFrame("Wyvtilities Deleter")
+val frame = JFrame("Deleter")
 var tries = 0
 fun main(@NotNull args : Array<String>) {
 
