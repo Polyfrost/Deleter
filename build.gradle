@@ -48,3 +48,4 @@ shadowJar {
     exclude 'META-INF', 'META-INF/**'
     exclude 'org/jetbrains/annotations', 'org/jetbrains/annotations/**'
 }
+jar.dependsOn(shadowJar)
