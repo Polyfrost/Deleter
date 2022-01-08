@@ -1,11 +1,10 @@
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version '1.5.21'
-    id 'java'
-    id "com.github.johnrengelman.shadow" version "7.0.0"
+    id 'org.jetbrains.kotlin.jvm' version '1.6.10'
+    id "com.github.johnrengelman.shadow" version "7.1.2"
 }
 
 group = 'net.wyvest'
-version = '1.1'
+version = '1.3'
 
 repositories {
     mavenCentral()
@@ -21,7 +20,7 @@ dependencies {
     // WARNING: If you are confident the Kotlin Stdlib will already be on the classpath
     // you can use implementation (This will not add the library to your jar decreasing the size)
     // The Kotlin Stdlib is about 2MB
-    include 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.21'
+    include 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.0'
     // How to normally add a dependency (If you don"t want it to be added to the jar)
     // implementation "com.example:example:1.0.0"
     // If you would like to include it (have the library inside your jar) instead use
