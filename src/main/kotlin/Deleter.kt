@@ -9,7 +9,13 @@ var tries = 0
 val text = JList(arrayOf("Deleter starting..."))
 
 fun main(given : Array<String>) {
+
     val joined = given.joinToString(separator = " ")
+
+    append("+++ ARGS")
+    append(joined)
+    append("--- ARGS")
+
     var quotation = false
     var stringBuilder = StringBuilder()
     val arrayList = ArrayList<String>()
@@ -39,17 +45,21 @@ fun main(given : Array<String>) {
     frame.defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
     for (file in arrayList) {
         tries = 0
-        delete(File(file))
+        delete(File(file.replace("#", " ")))
     }
     Thread.sleep(1000)
     exitProcess(0)
 }
 
 private fun delete(file: File) {
+    append("checking file \"${file.absolutePath}\" exists")
     if (!file.exists()) {
         append("\"${file.absolutePath}\" does not exist!")
         return
     }
+
+    append("deleting file \"${file.absolutePath}\"")
+
     if (!file.delete()) {
         tries += 1
         if (tries >= 4) {
@@ -65,6 +75,7 @@ private fun delete(file: File) {
 }
 
 private fun append(string: String) {
+    File("file.txt").appendText(string + "\n")
     println(string)
     text.model = JListList(getList().also { it.add(string) })
 }
