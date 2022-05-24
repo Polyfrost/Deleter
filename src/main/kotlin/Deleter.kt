@@ -75,7 +75,7 @@ private fun delete(file: File) {
 }
 
 private fun append(string: String) {
-    File("file.txt").appendText(string + "\n")
+    File("skyclientupdater/files/deleterlog.txt").appendText(string + "\n")
     println(string)
     text.model = JListList(getList().also { it.add(string) })
 }
