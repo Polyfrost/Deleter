@@ -1,4 +1,5 @@
 import java.io.File
+import java.io.PrintStream
 import javax.swing.*
 import javax.swing.event.EventListenerList
 import javax.swing.event.ListDataListener
@@ -8,31 +9,15 @@ import kotlin.system.exitProcess
 var tries = 0
 val text = JList(arrayOf("Deleter starting..."))
 
-val logfile = File("skyclientupdater/files/deleterlog.txt")
+val logfile = File("deleterlog.txt")
 
-fun main(given : Array<String>) {
-    val joined = given.joinToString(separator = " ")
-
+fun main(files : Array<String>) {
+    System.setOut(PrintStream(logfile))
     append("+++ ARGS")
-    append(joined)
+    append(files.joinToString())
     append("--- ARGS")
 
-    var quotation = false
-    var stringBuilder = StringBuilder()
-    val arrayList = ArrayList<String>()
-    for (char in joined) {
-        if (char.isWhitespace() && !quotation) {
-            arrayList.add(stringBuilder.toString())
-            stringBuilder = StringBuilder()
-            continue
-        } else if (char == '"') {
-            quotation = !quotation
-            continue
-        }
-        stringBuilder.append(char)
-    }
-    arrayList.add(stringBuilder.toString())
-    val frame = JFrame("Deleter")
+    val frame = JFrame("Deleter 1.6")
     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
     val scroll = JScrollPane(text)
     scroll.setBounds(0, 0, 500, 500)
@@ -44,16 +29,16 @@ fun main(given : Array<String>) {
     frame.setLocationRelativeTo(null)
     frame.isResizable = false
     frame.defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
-    for (file in arrayList) {
+    for (file in files) {
         tries = 0
-        delete(File(file.replace("#", " ")))
+        delete(File(file))
     }
     Thread.sleep(1000)
     exitProcess(0)
 }
 
 private fun delete(file: File) {
-    append("checking file \"${file.absolutePath}\" exists")
+    append("checking if \"${file.absolutePath}\" exists")
     if (!file.exists()) {
         append("\"${file.absolutePath}\" does not exist!")
         return
@@ -76,7 +61,6 @@ private fun delete(file: File) {
 }
 
 private fun append(string: String) {
-    logfile.appendText(string + "\n")
     println(string)
     text.model = JListList(getList().also { it.add(string) })
 }
