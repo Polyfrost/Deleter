@@ -9,10 +9,9 @@ import kotlin.system.exitProcess
 var tries = 0
 val text = JList(arrayOf("Deleter starting..."))
 
-val logfile = File("deleterlog.txt")
+val logfile = File("skyclientupdater/files/deleterlog.txt")
 
 fun main(files : Array<String>) {
-    System.setOut(PrintStream(logfile))
     append("+++ ARGS")
     append(files.joinToString())
     append("--- ARGS")
@@ -61,6 +60,7 @@ private fun delete(file: File) {
 }
 
 private fun append(string: String) {
+    logfile.appendText(string + "\n")
     println(string)
     text.model = JListList(getList().also { it.add(string) })
 }
