@@ -16,7 +16,7 @@ fun main(files : Array<String>) {
     append(files.joinToString())
     append("--- ARGS")
 
-    val frame = JFrame("Deleter 1.6")
+    val frame = JFrame("Deleter 1.7")
     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
     val scroll = JScrollPane(text)
     scroll.setBounds(0, 0, 500, 500)
