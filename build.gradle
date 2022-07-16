@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.kotlin.jvm' version '1.6.10'
     id "com.github.johnrengelman.shadow" version "7.1.2"
 }
 
@@ -10,7 +9,7 @@ java {
 }
 
 group = 'net.wyvest'
-version = '1.7'
+version = '1.8'
 
 repositories {
     mavenCentral()
@@ -23,23 +22,12 @@ configurations {
 }
 
 dependencies {
-    // WARNING: If you are confident the Kotlin Stdlib will already be on the classpath
-    // you can use implementation (This will not add the library to your jar decreasing the size)
-    // The Kotlin Stdlib is about 2MB
-    include 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.21'
-    // How to normally add a dependency (If you don"t want it to be added to the jar)
-    // implementation "com.example:example:1.0.0"
-    // If you would like to include it (have the library inside your jar) instead use
-    // include "com.example:example:1.0.0"
-}
 
-compileKotlin {
-    kotlinOptions.jvmTarget = '1.8'
 }
 
 jar {
     manifest.attributes(
-            'Main-Class': 'DeleterKt'
+            'Main-Class': 'Deleter'
     )
 
     enabled = false
@@ -52,6 +40,5 @@ shadowJar {
 
 
     exclude 'META-INF', 'META-INF/**'
-    exclude 'org/jetbrains/annotations', 'org/jetbrains/annotations/**'
 }
 jar.dependsOn(shadowJar)
