@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Deleter {
     private int tries = 0;
     private final JList<String> text = new JList<>(new String[]{"Deleter starting..."});
-    private static final File logFile = new File("skyclientupdater/files/deleterlog.txt");
+    private static File logFile = new File("skyclientupdater/files/deleterlog.txt");
 
     private Deleter() {
 
@@ -20,8 +20,13 @@ public class Deleter {
     }
 
     private void run(String[] files) throws UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException, InterruptedException, IOException {
-        logFile.getParentFile().mkdirs();
-        logFile.createNewFile();
+        if (!logFile.getParentFile().mkdirs()) {
+            System.out.println("Failed to mkdirs, setting deleterlog.txt to root");
+            logFile = new File("deleterlog.txt");
+        }
+        if (!logFile.createNewFile()) {
+            System.out.println("Failed to create file, thing may not work");
+        }
         append("+++ ARGS");
         for (String arg : files) {
             append("    " + arg);
